@@ -73,16 +73,20 @@
 OS := $(shell uname)
 ifeq ($(OS),Darwin)
 	LFLAGS = -framework GLUT -framework OpenGL
+	CXX = clang++
 else
 	LFLAGS = -lglut -lGLU -lGL
+	CXX = g++
 endif
+
+CXXFLAGS = -std=c++11
 
 
 ###############################################################
 # Build the main game
 ###############################################################
 a.out: driver.o game.o uiInteract.o uiDraw.o point.o velocity.o flyingObject.o bullet.o ship.o rock.o spacer.o sniper.o lander.o tank.o oldy.o superSpacer.o hugeRock.o largeRock.o mediumRock.o smallRock.o
-	g++ driver.o game.o uiInteract.o uiDraw.o point.o velocity.o flyingObject.o bullet.o ship.o rock.o spacer.o sniper.o lander.o tank.o oldy.o superSpacer.o hugeRock.o largeRock.o mediumRock.o smallRock.o $(LFLAGS)
+	$(CXX) driver.o game.o uiInteract.o uiDraw.o point.o velocity.o flyingObject.o bullet.o ship.o rock.o spacer.o sniper.o lander.o tank.o oldy.o superSpacer.o hugeRock.o largeRock.o mediumRock.o smallRock.o $(LFLAGS)
 
 ###############################################################
 # Individual files
@@ -93,64 +97,64 @@ a.out: driver.o game.o uiInteract.o uiDraw.o point.o velocity.o flyingObject.o b
 #    game.o        Handles the game interaction
 ###############################################################
 uiDraw.o: uiDraw.cpp uiDraw.h point.h
-	g++ -c uiDraw.cpp
+	$(CXX) $(CXXFLAGS) -c uiDraw.cpp
 
 uiInteract.o: uiInteract.cpp uiInteract.h point.h
-	g++ -c uiInteract.cpp
+	$(CXX) $(CXXFLAGS) -c uiInteract.cpp
 
 point.o: point.cpp point.h
-	g++ -c point.cpp
+	$(CXX) $(CXXFLAGS) -c point.cpp
 
 velocity.o: velocity.cpp velocity.h
-	g++ -c velocity.cpp
+	$(CXX) $(CXXFLAGS) -c velocity.cpp
 
 game.o: game.cpp game.h 
-	g++ -c game.cpp
+	$(CXX) $(CXXFLAGS) -c game.cpp
 
 driver.o: game.h uiInteract.h driver.cpp
-	g++ -c driver.cpp
+	$(CXX) $(CXXFLAGS) -c driver.cpp
 
 flyingObject.o: flyingObject.cpp flyingObject.h
-	g++ -c flyingObject.cpp
+	$(CXX) $(CXXFLAGS) -c flyingObject.cpp
 
 bullet.o: bullet.cpp bullet.h flyingObject.h 
-	g++ -c bullet.cpp
+	$(CXX) $(CXXFLAGS) -c bullet.cpp
 
 ship.o: ship.cpp ship.h flyingObject.h
-	g++ -c ship.cpp
+	$(CXX) $(CXXFLAGS) -c ship.cpp
 
 rock.o: rock.cpp rock.h flyingObject.h
-	g++ -c rock.cpp
+	$(CXX) $(CXXFLAGS) -c rock.cpp
 
 spacer.o: spacer.cpp spacer.h ship.h flyingObject.h
-	g++ -c spacer.cpp
+	$(CXX) $(CXXFLAGS) -c spacer.cpp
 
 sniper.o: sniper.cpp sniper.h ship.h flyingObject.h
-	g++ -c sniper.cpp
+	$(CXX) $(CXXFLAGS) -c sniper.cpp
 
 lander.o: lander.cpp lander.h ship.h flyingObject.h
-	g++ -c lander.cpp
+	$(CXX) $(CXXFLAGS) -c lander.cpp
 
 tank.o: tank.cpp tank.h ship.h flyingObject.h
-	g++ -c tank.cpp
+	$(CXX) $(CXXFLAGS) -c tank.cpp
 
 oldy.o: oldy.cpp oldy.h ship.h flyingObject.h
-	g++ -c oldy.cpp
+	$(CXX) $(CXXFLAGS) -c oldy.cpp
 
 superSpacer.o: superSpacer.cpp superSpacer.h ship.h flyingObject.h
-	g++ -c superSpacer.cpp
+	$(CXX) $(CXXFLAGS) -c superSpacer.cpp
 
 hugeRock.o: hugeRock.cpp hugeRock.h rock.h flyingObject.h
-	g++ -c hugeRock.cpp
+	$(CXX) $(CXXFLAGS) -c hugeRock.cpp
 
 largeRock.o: largeRock.cpp largeRock.h rock.h flyingObject.h
-	g++ -c largeRock.cpp
+	$(CXX) $(CXXFLAGS) -c largeRock.cpp
 
 mediumRock.o: mediumRock.cpp mediumRock.h rock.h flyingObject.h
-	g++ -c mediumRock.cpp
+	$(CXX) $(CXXFLAGS) -c mediumRock.cpp
 
 smallRock.o: smallRock.cpp smallRock.h rock.h flyingObject.h
-	g++ -c smallRock.cpp
+	$(CXX) $(CXXFLAGS) -c smallRock.cpp
 
 #######################################################################
 # ADD YOUR ADDITIONAL RULES HERE!
